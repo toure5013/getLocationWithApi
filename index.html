@@ -12,6 +12,7 @@ if(location.protocol != 'https:') {
       }
     };
 $.getJSON("http://ip-api.com/json", function (data, status) {
+  onsole.log(data)
         if(status === "success") {
             if(data) {
               console.log("------data------")
