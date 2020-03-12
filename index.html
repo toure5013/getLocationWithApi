@@ -1,7 +1,5 @@
 <script
-  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
+  src="jquery.js"></script>
 
 <script>
 
@@ -16,13 +14,16 @@ if(location.protocol != 'https:') {
 $.getJSON("http://ip-api.com/json", function (data, status) {
         if(status === "success") {
             if(data) {
+              console.log("------data------")
+              console.log(data)
                 $.getJSON("http://maps.googleapis.com/maps/api/geocode/json?address=" + res.zip, function (data, status) {
                     if (status === "success") {
                         position.coords.latitude = data.results[0].geometry.location.lat;
                         position.coords.longitude = data.results[0].geometry.location.lng;
-                        locationOnSuccess(position);
+                        console.log("1")
+                        console.log(position)
                     } else {
-                        locationOnError();
+                    console.log('eeror1');  
                     }
                 });        
             } else {
@@ -30,22 +31,19 @@ $.getJSON("http://ip-api.com/json", function (data, status) {
                 //if there's not zip code but we have a latitude and longitude, let's use them
                 position.coords.latitude = data.lat;
                 position.coords.longitude = data.lon;
-                locationOnSuccess(position);
+                  console.log('2');                
+                  console.log('data);                
                 } else {
                     //if there's an error 
-                    locationOnError();
+                    console.log('eeror2');  
                 }
             }
         } else {
-            locationOnError();
+            console.log('eeror3');  
         }
     });
-  } else {
-      navigator.geolocation.getCurrentPosition(locationOnSuccess, locationOnError, geo_options);
-  }
-} else {
-      navigator.geolocation.getCurrentPosition(locationOnSuccess, locationOnError, geo_options);
-  }
+  } 
+} 
   
 </script>
   
